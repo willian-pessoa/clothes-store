@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./sing-in.styles.scss";
+import "./sign-in.styles.scss";
 
 // db
 import { signInWithGoogle } from "../../firebase/firebase.utils";
@@ -8,7 +8,7 @@ import { signInWithGoogle } from "../../firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-export default function SingIn() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,9 +37,9 @@ export default function SingIn() {
   };
 
   return (
-    <div className="sing-in">
+    <div className="sign-in">
       <h2>I already have Account</h2>
-      <span>Sing In with your email and password</span>
+      <span>Sign In with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
