@@ -1,8 +1,13 @@
 import React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
+
+import store from './redux/store';
+
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+
 
 const container = document.getElementById('root');
 
@@ -11,6 +16,8 @@ const root = ReactDOMClient.createRoot(container);
 
 // Initial render: Render an element to the root.
 root.render(
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>);
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>);
