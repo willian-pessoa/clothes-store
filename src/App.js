@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate} from "react-router-dom";
 
 // redux
 import { connect } from 'react-redux';
@@ -20,7 +20,7 @@ import { useEffect } from 'react';
 function App(props) {
 
   useEffect(() => {
-    const {setCurrentUser} = props;
+    const { setCurrentUser } = props;
 
     let unsubscribe = null;
     unsubscribe = auth.onAuthStateChanged(async userAuth => {
@@ -38,18 +38,22 @@ function App(props) {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route exact path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="singin" element={<SignInAndSignUp />} />
+        <Route exact path="singin" element={props.currentUser ? <Navigate to="/"/> : <SignInAndSignUp />} />
       </Routes>
     </div>
   );
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
 const mapToDispatchProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapToDispatchProps)(App);
+export default connect(mapStateToProps, mapToDispatchProps)(App);
