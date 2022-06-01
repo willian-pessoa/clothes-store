@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 function App(props) {
 
   useEffect(() => {
-    const { setCurrentUser } = props;
+    const { setCurrentUser} = props;
 
     let unsubscribe = null;
     unsubscribe = auth.onAuthStateChanged(async userAuth => {
@@ -53,7 +53,7 @@ function App(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 })
 
 const mapToDispatchProps = dispatch => ({
