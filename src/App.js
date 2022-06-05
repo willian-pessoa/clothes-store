@@ -5,6 +5,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { checkUserSession } from './redux/user/user.actions';
 
 // pages
 import HomePage from './pages/homepage/homepage.component';
@@ -18,24 +19,15 @@ import Header from './components/header/header.component';
 //utils
 import { useEffect } from 'react';
 
-function App(props) {
+function App({ checkUserSession, ...props }) {
 
-  /* useEffect(() => {
-    const { setCurrentUser} = props;
+  const unsubscribe = null;
 
-    let unsubscribe = null;
-    unsubscribe = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({ id: snapShot.id, ...snapShot.data() })
-        });
-      };
-      setCurrentUser(userAuth);
-    })
+  useEffect(() => {
+    checkUserSession();
+    
     return () => unsubscribe;
-  }, []) */
+  }, [])
 
   return (
     <div>
@@ -54,4 +46,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
