@@ -12,7 +12,7 @@ import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 function ShopPage({ fetchCollectionsStart }) {
   useEffect(() => {
     fetchCollectionsStart();
-  }, []);
+  }, [fetchCollectionsStart]);
 
   return (
     <div className="shopPage">

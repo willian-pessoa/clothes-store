@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { selectCollections } from '../../redux/shop/shop.selectors'
 
@@ -8,7 +8,8 @@ import "./collection.styles.scss"
 
 import CollectionItem from '../../components/collection-item/collection-item.component'
 
-function CollectionPage({collections}) {
+function CollectionPage() {
+  const collections = useSelector(selectCollections)
   const currentParam = useParams().collectionId
   const {title, items} = collections[currentParam]
   return (
@@ -23,11 +24,6 @@ function CollectionPage({collections}) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return({
-    collections: selectCollections(state)
-  })
-}
 
 
-export default connect(mapStateToProps)(CollectionPage)
+export default CollectionPage;
